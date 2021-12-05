@@ -1,4 +1,3 @@
-using asp.net.core.helper.core.Extensions;
 using asp.net.core.helper.core.Seed.Extensions;
 using helper.sample.Database;
 using Microsoft.AspNetCore.Builder;
@@ -55,7 +54,6 @@ namespace helper.sample
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapBpAuthenticationController("/authenticate");
                 endpoints.MapControllers();
             });
         }
