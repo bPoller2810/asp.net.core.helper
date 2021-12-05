@@ -5,6 +5,12 @@ asp.net.core.helper is a library to greatly reduce asp.net boilerplate code and 
 ![Nuget](https://img.shields.io/nuget/v/asp.net.core.helper?logo=NuGet)
 ![](https://github.com/bPoller2810/asp.net.core.helper/actions/workflows/dotnet.yml/badge.svg)
 
+# Setup
+Use Nuget Package Manager to install the package into your project:
+```bash
+Install-Package asp.net.core.helper.core
+```
+
 # Usage
 
 [Startup.cs](sample/helper.sample/Startup.cs): As Last steps before you Map your endpoints, use [MigrateDatabase](src/asp.net.core.helper.core/Seed/Extensions/WebAppExtensions.cs) and/or [SeedDatabase](src/asp.net.core.helper.core/Seed/Extensions/WebAppExtensions.cs) to get the Package working.
