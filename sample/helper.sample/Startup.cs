@@ -1,5 +1,7 @@
+using asp.net.core.helper.core.Extensions;
 using asp.net.core.helper.core.Seed.Extensions;
 using helper.sample.Database;
+using helper.sample.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,16 +27,22 @@ namespace helper.sample
         {
             services.AddControllers();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "helper.sample", Version = "v1" });
-            });
+            services.AddSwaggerGen(c => c.SwaggerDoc(
+                "v1",
+                new OpenApiInfo
+                {
+                    Title = "helper.sample",
+                    Version = "v1"
+                }));
 
             var connectionString = "server=localhost;user=root;password=unsecure1Admin;database=SampleX1";
             var version = new Version(10, 6, 4);
             var serverVersion = new MariaDbServerVersion(version);
             services.AddDbContext<SampleContext>(options =>
                 options.UseMySql(connectionString, serverVersion));
+
+
+            services.AddBpAuthentication<SampleAuthenticationConfiguration>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,9 +60,12 @@ namespace helper.sample
             app.MigrateDatabase<SampleContext>();
             app.SeedDatabase<SampleContext>(typeof(Startup));
 
+            app.UseBpAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapBpAuthenticationController(SampleAuthenticationConfiguration.ROUTE);
             });
         }
     }

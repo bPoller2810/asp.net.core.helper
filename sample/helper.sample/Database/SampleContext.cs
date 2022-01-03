@@ -10,7 +10,7 @@ namespace helper.sample.Database
         public SampleContext(DbContextOptions<SampleContext> options) : base(options) { }
         #endregion
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> Users => Set<User>();
 
     }
 }

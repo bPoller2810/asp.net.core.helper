@@ -3,16 +3,28 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Company>Bernhard Pollerspöck</Company>
+    <Description>asp.net.core.helper is a library to greatly reduce asp.net boilerplate code and lets you focus on your domain specific stuff.</Description>
+    <PackageProjectUrl>https://github.com/bPoller2810/asp.net.core.helper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/bPoller2810/asp.net.core.helper</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>asp.net, efcore, c#, net5, api</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <Version>1.0.1</Version>
+    <Authors>Bernhard Pollerspöck</Authors>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Auth\**" />
-    <EmbeddedResource Remove="Auth\**" />
-    <None Remove="Auth\**" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   
   <ItemGroup>

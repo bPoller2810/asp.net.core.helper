@@ -1,0 +1,20 @@
+
+
+
+
+
+
+
+
+
+
+
+JwtMiddleware
+
+AuthAttribute
+
+AuthController
+ -500 service loading error / userid null / hash null
+ -400 body null
+ -401 verification false
+
