@@ -2,7 +2,14 @@
 
 asp.net.core.helper is a library to greatly reduce asp.net boilerplate code and lets you focus on your domain specific stuff.
 
+![Nuget](https://img.shields.io/nuget/v/asp.net.core.helper.core?logo=NuGet)
 ![](https://github.com/bPoller2810/asp.net.core.helper/actions/workflows/dotnet.yml/badge.svg)
+
+# Setup
+Use Nuget Package Manager to install the package into your project:
+```bash
+Install-Package asp.net.core.helper.core
+```
 
 # Usage
 
