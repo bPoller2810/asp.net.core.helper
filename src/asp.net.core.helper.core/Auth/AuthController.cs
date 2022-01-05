@@ -9,6 +9,7 @@ using System.Text;
 using BCryptNet = BCrypt.Net.BCrypt;
 using System.Threading.Tasks;
 using asp.net.core.helper.core.Auth.Services;
+using Microsoft.Extensions.Hosting;
 
 namespace asp.net.core.helper.core.Auth
 {
@@ -32,10 +33,15 @@ namespace asp.net.core.helper.core.Auth
             #endregion
 
             #region services
+            var env = context.RequestServices.GetService<IHostEnvironment>();
             var jwtService = context.RequestServices.GetService<IJwtService>();
             var authConfig = context.RequestServices.GetService<IAuthenticationConfiguration>();
             if (jwtService is null || authConfig is null)
             {
+                if (env.IsDevelopment())
+                {
+                    await context.Response.WriteAsync($"has jwt: {jwtService is null} has auth: {authConfig is null}");
+                }
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 return;
             }
@@ -45,6 +51,10 @@ namespace asp.net.core.helper.core.Auth
             var userId = authConfig.GetUserIdByName(body.Username);
             if (userId is null)
             {
+                if (env.IsDevelopment())
+                {
+                    await context.Response.WriteAsync($"has user: {jwtService is null}");
+                }
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 return;
             }
@@ -52,6 +62,10 @@ namespace asp.net.core.helper.core.Auth
             var userHash = authConfig.GetUserHashById(userId);
             if (userHash is null)
             {
+                if (env.IsDevelopment())
+                {
+                    await context.Response.WriteAsync($"has hash: {jwtService is null}");
+                }
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 return;
             }
@@ -68,8 +82,10 @@ namespace asp.net.core.helper.core.Auth
 
             var response = new AuthenticationResponse(body.Username, token.Token, token.ExpirationUtc);
 
-
             await context.Response.WriteAsJsonAsync(response);
+
+
+            await authConfig.SuccessfullAuthentication(context);
             return;
         }
 

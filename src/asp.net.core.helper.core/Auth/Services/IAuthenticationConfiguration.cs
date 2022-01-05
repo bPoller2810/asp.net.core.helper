@@ -1,4 +1,7 @@
-﻿namespace asp.net.core.helper.core.Auth.Services
+﻿using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+
+namespace asp.net.core.helper.core.Auth.Services
 {
     public interface IAuthenticationConfiguration
     {
@@ -7,6 +10,7 @@
 
         string? GetUserIdByName(string username);
         string? GetUserHashById(string userId);
-        bool IsUserAuthenticationAllowed(string userId, string username);
+        bool IsUserAuthenticationAllowed(string userId, string username, HttpContext context);
+        Task SuccessfullAuthentication(HttpContext context);
     }
 }

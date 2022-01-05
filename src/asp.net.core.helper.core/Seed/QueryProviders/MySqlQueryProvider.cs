@@ -7,7 +7,7 @@
 
         public string CreateSeedInfoTable => $"CREATE TABLE `{IQueryProvider.INFO_TABLE}` (" +
                                                     "`Id` INT(11) NOT NULL AUTO_INCREMENT," +
-                                                    "`Key` TINYTEXT NOT NULL" +
+                                                    "`Key` TINYTEXT NOT NULL," +
                                                     "`Timestamp` DATETIME NOT NULL," +
                                                     "PRIMARY KEY(`Id`) USING BTREE" +
                                                 ")";

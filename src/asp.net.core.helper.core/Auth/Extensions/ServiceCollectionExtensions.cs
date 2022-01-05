@@ -18,7 +18,7 @@ namespace asp.net.core.helper.core.Extensions
         public static void AddBpAuthentication<TConfiguration>(this IServiceCollection self)
             where TConfiguration : class, IAuthenticationConfiguration
         {
-            self.AddSingleton<IAuthenticationConfiguration, TConfiguration>();
+            self.AddScoped<IAuthenticationConfiguration, TConfiguration>();
             self.AddScoped<IJwtService, DefaultJwtService>();
         }
 
