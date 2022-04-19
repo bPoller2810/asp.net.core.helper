@@ -16,7 +16,7 @@ namespace asp.net.core.helper.core.Seed.Extensions
             context?.Database.Migrate();
         }
 
-        public static void SeedDatabase<TDbContext>(this IApplicationBuilder self, Type assemblyType)
+        public static void SeedDatabase<TDbContext>(this IApplicationBuilder self, Type assemblyType,IServiceProvider serviceProvider)
             where TDbContext : DbContext
         {
             var scope = self.ApplicationServices.CreateScope();
@@ -31,7 +31,7 @@ namespace asp.net.core.helper.core.Seed.Extensions
 
             foreach (var seeder in seeders)
             {
-                seeder?.Seed();
+                seeder?.Seed(serviceProvider);
             }
         }
     }

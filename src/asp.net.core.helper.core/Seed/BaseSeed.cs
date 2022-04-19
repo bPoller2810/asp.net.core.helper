@@ -31,7 +31,7 @@ namespace asp.net.core.helper.core.Seed
         #endregion
 
         #region seeding
-        public void Seed()
+        public void Seed(IServiceProvider serviceProvider)
         {
             var con = Context.Database.GetDbConnection();
             if (!SeedInfoTableExists(con))
@@ -44,7 +44,7 @@ namespace asp.net.core.helper.core.Seed
                 return;
             }
 
-            var success = PerformSeed();
+            var success = PerformSeed(serviceProvider);
             if (success)
             {
                 Context.SaveChanges();
@@ -56,7 +56,7 @@ namespace asp.net.core.helper.core.Seed
         #region abstract
         protected abstract string Key { get; }
         protected abstract int Order { get; }
-        protected abstract bool PerformSeed();
+        protected abstract bool PerformSeed(IServiceProvider serviceProvider);
         #endregion
 
         #region sql helper methods
