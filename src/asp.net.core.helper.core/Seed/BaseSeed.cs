@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data.Common;
+using System.Threading.Tasks;
 
 namespace asp.net.core.helper.core.Seed
 {
@@ -31,7 +32,7 @@ namespace asp.net.core.helper.core.Seed
         #endregion
 
         #region seeding
-        public void Seed(IServiceProvider serviceProvider)
+        public async Task Seed(IServiceProvider serviceProvider)
         {
             var con = Context.Database.GetDbConnection();
             if (!SeedInfoTableExists(con))
@@ -44,7 +45,7 @@ namespace asp.net.core.helper.core.Seed
                 return;
             }
 
-            var success = PerformSeed(serviceProvider);
+            var success = await PerformSeed(serviceProvider);
             if (success)
             {
                 Context.SaveChanges();
@@ -56,7 +57,7 @@ namespace asp.net.core.helper.core.Seed
         #region abstract
         protected abstract string Key { get; }
         protected abstract int Order { get; }
-        protected abstract bool PerformSeed(IServiceProvider serviceProvider);
+        protected abstract Task<bool> PerformSeed(IServiceProvider serviceProvider);
         #endregion
 
         #region sql helper methods

@@ -31,7 +31,7 @@ namespace asp.net.core.helper.core.Seed.Extensions
 
             foreach (var seeder in seeders)
             {
-                seeder?.Seed(serviceProvider);
+                seeder?.Seed(serviceProvider).RunSynchronously();
             }
         }
     }
